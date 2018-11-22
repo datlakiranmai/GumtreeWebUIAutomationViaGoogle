@@ -31,7 +31,7 @@ public class GoogleSearchSteps extends CucumberRunner {
     }
 
     @Then("^user should be presented with search results$")
-    public void user_should_be_presented_with_search_results() throws Exception{
+    public void user_should_be_presented_with_search_results() throws Exception {
         GoogleSearchResultsPage resultsPage = new GoogleSearchResultsPage(driver);
         new ExpectedCondition<Boolean>() {
                     public Boolean apply(WebDriver driver) {
@@ -56,7 +56,7 @@ public class GoogleSearchSteps extends CucumberRunner {
     }
 
     @And("^user should be able to navigate to each Gumtree link and view the results$")
-    public void user_should_be_able_to_navigate_to_each_Gumtree_link_and_view_the_results() {
+    public void user_should_be_able_to_navigate_to_each_Gumtree_link_and_view_the_results() throws Exception {
         GoogleSearchResultsPage resultsPage = new GoogleSearchResultsPage(driver);
         GumtreeResultsPage gumtreeResultsPage = new GumtreeResultsPage(driver);
         List<String> results = resultsPage.getLinkResultsText();
@@ -69,9 +69,9 @@ public class GoogleSearchSteps extends CucumberRunner {
                 } catch(Exception e) {
                     softAssertion.assertTrue(false, "page load not completed on the specified time");
                 }
-//                softAssertion.assertEquals(driver.getTitle(), "Used Cars for sale in London - Gumtree");
-//                int count = Integer.parseInt(gumtreeResultsPage.getSearchResultsCount());
-//                softAssertion.assertTrue(count > 0);
+                softAssertion.assertEquals(driver.getTitle(), "Used Cars for sale in London - Gumtree");
+                int count = gumtreeResultsPage.getSearchResultsCount();
+                softAssertion.assertTrue(count > 0);
             }
         }
         softAssertion.assertAll();

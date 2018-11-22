@@ -5,9 +5,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.text.NumberFormat;
+import java.util.Locale;
+
 public class GumtreeResultsPage {
     private WebDriver driver;
-
     @FindBy(className = "h1-responsive")
     private WebElement searchResultsCount;
 
@@ -16,9 +18,11 @@ public class GumtreeResultsPage {
         PageFactory.initElements(driver, this);
     }
 
-    public String getSearchResultsCount() {
+    public int getSearchResultsCount() throws Exception {
         String[] words = searchResultsCount.getText().split(" ");
-        return words[0].replace(",","");
+        NumberFormat format = NumberFormat.getInstance(Locale.UK);
+        Number searchCount = format.parse(words[0]);
+        return searchCount.intValue();
     }
 
 }
