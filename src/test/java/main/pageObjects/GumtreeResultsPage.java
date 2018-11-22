@@ -18,7 +18,7 @@ public class GumtreeResultsPage {
 
     public String getSearchResultsCount() {
         String[] words = searchResultsCount.getText().split(" ");
-        return words[0];
+        return words[0].replace(",","");
     }
 
 }
